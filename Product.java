@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class Product {
 
-    private static int code = 0;
+    private final static int code = 0;
     private final String name;
     private final String brand;
     private int quantity; // non final puo cambiare
@@ -22,4 +22,39 @@ public class Product {
     private Image setImage(){
         return null;
     }
+
+    public Image getImage(){
+        return this.image;
+    }
+
+    public void addQuantity(){
+        this.quantity++;
+    }
+
+    public int getCode(){
+        
+        return this.code;
+    }
+
+    public String getName(){
+
+        return this.name;
+    }
+
+    public String getBrand(){
+
+        return this.brand;
+    }
+
+    public int getQuantity(){
+
+        return this.quantity;
+    }
+
+    public double getPrice(){
+
+        return this.price;
+    }
+
+
 }
