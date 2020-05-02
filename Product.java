@@ -11,7 +11,7 @@ public class Product {
 
     public Product(String name, String brand, int quantity, double price){
 
-        code++;
+        Product.code++;
         this.name = name;
         this.brand = brand;
         this.quantity = quantity;
