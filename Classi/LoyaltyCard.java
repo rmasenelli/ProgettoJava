@@ -3,9 +3,9 @@ import java.time.LocalDate;
 
 public class LoyaltyCard {
 
-    private static final int code;
-    private static final LocalDate emissionDate;
-    private static int points;
+    private static final int code = 0;
+    private final LocalDate emissionDate;
+    private int points;
 
 
     public LoyaltyCard(){

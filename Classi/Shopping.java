@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Shopping {
 
-    private static int code = 0;
-    private static Date deliveryDate;
-    private static String deliveryInterval; //String oppure ore?
+    private final static int code = 0;
+    private Date deliveryDate;
+    private String deliveryInterval; //String oppure ore?
     private List<Product> cart;
-    private final static Customer customer;
+    private final Customer customer;
     private int price;
     private Payment payment;
     private int points;

@@ -7,16 +7,16 @@ public class Customer{
 
     private final String name;
     private final String surname;
-    private final String address;
-    private final String cap;
-    private final String city;
-    private final String telephone;
-    private final String mail;
-    private final String password;
+    private String address;
+    private String cap;
+    private String city;
+    private String telephone;
+    private String mail;
+    private String password;
     private final LoyaltyCard card;
-    private final Payment payment;
-    private final List<Product> cartHistory;
-    private final List<Product> cart;
+    private Payment payment;
+    private List<Product> cartHistory;
+    private List<Product> cart;
 
         // COSTRUTTORE CUSTOMER
 

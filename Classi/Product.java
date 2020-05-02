@@ -6,7 +6,7 @@ public class Product {
     private final String name;
     private final String brand;
     private int quantity; // non final puo cambiare
-    private final double price;
+    private double price;
     private final Image image; 
 
     public Product(String name, String brand, int quantity, double price){
