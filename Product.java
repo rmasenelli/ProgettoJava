@@ -33,7 +33,7 @@ public class Product {
 
     public int getCode(){
         
-        return this.code;
+        return Product.code;
     }
 
     public String getName(){
