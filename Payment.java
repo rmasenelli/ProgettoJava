@@ -1,5 +1,8 @@
 
 
-public class Payment {
+public enum Payment {
 
+    PayPal,
+    CreditCard,
+    onDelivery
 }
