@@ -8,14 +8,14 @@ public class Shopping {
     private Date deliveryDate;
     private String deliveryInterval; //String oppure ore?
     private List<Product> cart;
-    private final Customer customer;
+   // private final Customer customer;
     private int price;
     private Payment payment;
     private int points;
     private State state;
 
     public Shopping(){
-        Shopping.code++;
+        /*Shopping.code++;
         this.deliveryDate; //TODO
         this.deliveryInterval; //TODO
         this.cart = new LinkedList<Product>();
@@ -23,6 +23,6 @@ public class Shopping {
         this.price;
         this.payment;
         this.points;
-        this.state;
+        this.state;*/
     }
 }

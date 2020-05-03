@@ -2,7 +2,8 @@ import java.awt.*;
 
 public class Product {
 
-    private final static int code = 0;
+    private static int id = 0;
+    private final int code;
     private final String name;
     private final String brand;
     private int quantity; // non final puo cambiare
@@ -10,8 +11,8 @@ public class Product {
     private final Image image; 
 
     public Product(String name, String brand, int quantity, double price){
-
-        Product.code++;
+        Product.id++;
+        this.code = id;
         this.name = name;
         this.brand = brand;
         this.quantity = quantity;
@@ -33,7 +34,7 @@ public class Product {
 
     public int getCode(){
         
-        return Product.code;
+        return this.code;
     }
 
     public String getName(){
