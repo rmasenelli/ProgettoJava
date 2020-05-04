@@ -1,3 +1,8 @@
-#loginButton:hover{
-    -fx-backgrounf
+#anchor {
+    fx-background-color: #A5EBF3;
+
+}
+
+#pane{
+    fx-background-color: #222222;
 }

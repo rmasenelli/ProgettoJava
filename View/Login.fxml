@@ -4,12 +4,13 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField id="userText" alignment="CENTER" layoutX="220.0" layoutY="170.0" promptText="Username" AnchorPane.bottomAnchor="206.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="169.0" />
       <PasswordField id="passText" alignment="CENTER" layoutX="223.0" layoutY="209.0" promptText="Password" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0" />
       <Button id="loginButton" layoutX="278.0" layoutY="258.0" mnemonicParsing="false" text="Login" textAlignment="CENTER" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="270.0" />
+      <Pane id="pane" layoutX="51.0" layoutY="69.0" prefHeight="260.0" prefWidth="526.0" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="69.0" />
    </children>
 </AnchorPane>
