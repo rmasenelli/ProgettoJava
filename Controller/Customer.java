@@ -38,6 +38,10 @@ public class Customer{
 
     }
 
+    private void saveToDB(){
+        
+    }
+
         // GETTERS CUSTOMER
 
     public String getName(){
