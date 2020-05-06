@@ -1,18 +1,18 @@
-import java.sql.Date;
-import java.util.LinkedList;
-import java.util.List;
+//import java.sql.Date;
+//import java.util.LinkedList;
+//import java.util.List;
 
 public class Shopping {
 
-    private final static int code = 0;
-    private Date deliveryDate;
-    private String deliveryInterval; //String oppure ore?
-    private List<Product> cart;
+    //private final static int code = 0;
+    //private Date deliveryDate;
+    //private String deliveryInterval; //String oppure ore?
+    //private List<Product> cart;
    // private final Customer customer;
-    private int price;
-    private Payment payment;
-    private int points;
-    private State state;
+    //private int price;
+    //private Payment payment;
+    //private int points;
+    //private State state;
 
     public Shopping(){
         /*Shopping.code++;

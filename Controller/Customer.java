@@ -1,5 +1,5 @@
-import java.util.LinkedList;
-import java.util.List;
+//import java.util.LinkedList;
+//import java.util.List;
 
 public class Customer{
 
@@ -14,14 +14,15 @@ public class Customer{
     private String mail;
     private String password;
     private final LoyaltyCard card;
-    private Payment payment;
-    private List<Product> cartHistory;
-    private List<Product> cart;
+    private String payment;
+    //private Payment payment;
+    //private List<Product> cartHistory;
+    //private List<Product> cart;
 
         // COSTRUTTORE CUSTOMER
 
     public Customer(String name, String surname, String address, String cap, String city, 
-            String telephone, String mail, String password, LoyaltyCard card, Payment payment){
+            String telephone, String mail, String password, String payment){
 
         this.name = name;
         this.surname = surname;
@@ -31,16 +32,16 @@ public class Customer{
         this.telephone = telephone;
         this.mail = mail;
         this.password = password;
-        this.card = new LoyaltyCard();
+        //this.card = new LoyaltyCard();
         this.payment = payment;
-        this.cartHistory = new LinkedList<Product>();
-        this.cart = new LinkedList<Product>();
+        //this.cartHistory = new LinkedList<Product>();
+        //this.cart = new LinkedList<Product>();
 
     }
 
-    private void saveToDB(){
+    //private void saveToDB(){
         
-    }
+    //}
 
         // GETTERS CUSTOMER
 

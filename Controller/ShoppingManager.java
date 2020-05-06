@@ -1,21 +1,21 @@
 
 public class ShoppingManager {
 
-    private static int serialNumber = 0;
+    //private static int serialNumber = 0;
     private final String name;
     private final String surname;
     private String role;
     private final String login;
-    private String password;
+   // private String password;
 
     public ShoppingManager(String name, String surname, String role, String login, String password){
 
-        ShoppingManager.serialNumber++;
+        //ShoppingManager.serialNumber++;
         this.name = name;
         this.surname = surname;
         this.role = role;
         this.login = login;
-        this.password = password;
+        //this.password = password;
     }
 
     public String getName(){
