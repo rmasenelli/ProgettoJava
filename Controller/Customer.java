@@ -13,7 +13,7 @@ public class Customer{
     private String telephone;
     private String mail;
     private String password;
-    private final LoyaltyCard card;
+    //private final LoyaltyCard card;
     private String payment;
     //private Payment payment;
     //private List<Product> cartHistory;
@@ -21,8 +21,7 @@ public class Customer{
 
         // COSTRUTTORE CUSTOMER
 
-    public Customer(String name, String surname, String address, String cap, String city, 
-            String telephone, String mail, String password, String payment){
+    public Customer(String name, String surname, String address, String cap, String city, String telephone, String mail, String password, String payment){
 
         this.name = name;
         this.surname = surname;
@@ -82,15 +81,21 @@ public class Customer{
 
     //getPassword? :(
 
-    public LoyaltyCard getCard(){
+    /*public LoyaltyCard getCard(){
 
         return this.card;
-    }
+    }*/
 
-    public Payment getPayment(){
+    /*public Payment getPayment(){
 
         return this.payment;
-    }
+    }*/
 
     // getHistory e getCart
+
+
+    public String toString(){
+
+        return "Nome: "+this.name+"        Cognome: "+this.surname+"\nEmail: "+this.mail+"\nIndirizzo: "+this.address+"\nCittà:"+this.city+"          CAP: "+this.cap+"\nTelefono: "+this.telephone; 
+    }
 }
