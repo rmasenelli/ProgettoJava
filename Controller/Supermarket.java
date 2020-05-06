@@ -16,9 +16,11 @@ public class Supermarket {
            
 
             Scanner key = new Scanner(System.in);
+
             int choose;
 
             System.out.println("Inserire scelta:\n1. Login;\n2. Sign-Up;");
+
             choose = key.nextInt();
 
             if(choose == 1){
@@ -58,6 +60,7 @@ public class Supermarket {
         private void login() throws SQLException {
 
             String email, password;
+
             Scanner key = new Scanner(System.in);
 
             System.out.println("Inserire username: ");
@@ -66,12 +69,16 @@ public class Supermarket {
             System.out.println("Inserire Password: ");                
             password = key.nextLine();
 
+            key.close();
             
             Statement st = connection.createStatement();
             ResultSet rs=st.executeQuery("SELECT * FROM Customer");
+
             while(rs.next()){
                 if(rs.getString("email").equals(email)){
+
                     if(rs.getString("C_password").equals(password)){
+
                         System.out.println("\n\nLogin effettuato!\n\n");
                         currentCustomer = new Customer(rs.getString("C_name"), rs.getString("C_surname"), rs.getString("C_address"), rs.getString("C_cap"), rs.getString("C_city"), rs.getString("C_telephone"), rs.getString("email"), rs.getString("C_password"), rs.getString("C_payment"));
                         return;
@@ -114,6 +121,7 @@ public class Supermarket {
             key.close();
 
             Statement st = connection.createStatement();
+
             st.executeUpdate("INSERT INTO Customer (email, C_name, C_surname, C_password, C_address, C_city, C_CAP, C_telephone, C_payment) "
                             +"VALUES ('"+email+"', '"+name+"', '"+surname+"', '"+password+"', '"+address+"', '"+city+"', '"+cap+"', '"+telephone+"', '"+payment+"')");             
 
