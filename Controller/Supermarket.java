@@ -12,6 +12,8 @@ public class Supermarket {
     private Statement st;
     private ResultSet rs;
 
+    p
+
     public Supermarket() {
 
         try {
@@ -201,6 +203,13 @@ public class Supermarket {
             currentCustomer = new Customer(name, surname, address, cap, city, telephone, email, password, new LoyaltyCard(getIDFromDB(), dt), payment);
 
         }
-}
+
+        private String cryptPassword(String tmp){
+
+            String salt = "!Pi(Z#9";
+
+            return tmp^salt; 
+        }
+    }
 
 
