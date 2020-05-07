@@ -13,7 +13,7 @@ public class Customer{
     private String telephone;
     private String mail;
     private String password;
-    //private final LoyaltyCard card;
+    private final LoyaltyCard card;
     private String payment;
     //private Payment payment;
     //private List<Product> cartHistory;
@@ -21,7 +21,7 @@ public class Customer{
 
         // COSTRUTTORE CUSTOMER
 
-    public Customer(String name, String surname, String address, String cap, String city, String telephone, String mail, String password, String payment){
+    public Customer(String name, String surname, String address, String cap, String city, String telephone, String mail, String password, LoyaltyCard card, String payment){
 
         this.name = name;
         this.surname = surname;
@@ -31,7 +31,7 @@ public class Customer{
         this.telephone = telephone;
         this.mail = mail;
         this.password = password;
-        //this.card = new LoyaltyCard();
+        this.card = card;
         this.payment = payment;
         //this.cartHistory = new LinkedList<Product>();
         //this.cart = new LinkedList<Product>();
@@ -81,10 +81,10 @@ public class Customer{
 
     //getPassword? :(
 
-    /*public LoyaltyCard getCard(){
+    public LoyaltyCard getCard(){
 
         return this.card;
-    }*/
+    }
 
     /*public Payment getPayment(){
 
@@ -96,6 +96,6 @@ public class Customer{
 
     public String toString(){
 
-        return "Nome: "+this.name+"        Cognome: "+this.surname+"\nEmail: "+this.mail+"\nIndirizzo: "+this.address+"\nCittà:"+this.city+"          CAP: "+this.cap+"\nTelefono: "+this.telephone; 
+        return "Nome: "+this.name+"        Cognome: "+this.surname+"\nEmail: "+this.mail+"\nIndirizzo: "+this.address+"\nCittà:"+this.city+"          CAP: "+this.cap+"\nTelefono: "+this.telephone+"\nN. carta: "+this.card.getCode(); 
     }
 }
