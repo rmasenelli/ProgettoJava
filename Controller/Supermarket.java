@@ -3,6 +3,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -33,40 +34,31 @@ public class Supermarket {
         
 
         Scanner key = new Scanner(System.in);
-        int choose;
 
-        System.out.print("\nOpzioni:\n\n1. Login;\n2. Sign-Up\n\nScelta: ");
+        printWelcomeMenu();
 
-            choose = key.nextInt();
+        try {
 
-            if(choose == 1){
-                try{
-                    login();
-                    delete();
+            welcomeSelection(key.nextInt());
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-                }
-                catch(SQLException e){
-                    System.err.println("\nErrore di login!\n");
-                    e.printStackTrace();
-                }
-            }
-            else if(choose == 2){
-                
-                try{
-                    signup();
+        printLoggedMenu();
+        
+        try {
 
-                }
-                catch(SQLException e){
-                    System.err.println("\nErrore di signup!\n");
-                    e.printStackTrace();
-                }
+            loggedSelection(key.nextInt());
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+            
+        key.close();
 
-            }
-
-            //delete();
-            key.close();
-
-            System.out.println("\n");
+        System.out.println("\n");
         }
         public static void main(String[] args) {            
 
@@ -100,8 +92,6 @@ public class Supermarket {
 
             System.out.print("Password: ");                
             password = key.nextLine();
-
-            key.close();
             
             try {
                 resultSet=statement.executeQuery("SELECT * FROM customer WHERE email = \""+email+"\"");
@@ -184,10 +174,6 @@ public class Supermarket {
 
             password=encrypt(password);
 
-            key.close();
-
-            //Statement statement = connection.createStatement();
-
             java.util.Date dt = new java.util.Date();
 
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -195,8 +181,6 @@ public class Supermarket {
             String currentTime = sdf.format(dt);
             
             int idCard = getIDFromDB();
-
-           // System.out.println("ID Retrieved:"+idCard);
 
             statement.executeUpdate("INSERT INTO loyaltyCard (code, emissionDate, points) VALUES ('"+idCard+"', '"+currentTime+"', '"+0+"')");
 
@@ -240,6 +224,122 @@ public class Supermarket {
                 throw new RuntimeException(e); 
             } 
         }
-}
+
+        private void modifyCustomer() throws SQLException{
+
+            System.out.print("Modifica:\n1. Nome\n2. Cognome\n3. Email\n4. Password\n5. Indirizzo\n6. Città\n7. CAP\n8.Metodo di Pagamento\n9. Logout\n\nScelta: ");
+            Scanner key = new Scanner(System.in);
+            PreparedStatement preparedStatement;
+            int choose = key.nextInt();
+            key.nextLine();
+            String sql;
+
+            while(choose != 9){
+
+                switch(choose){
+                
+                    case 1 : 
+                        sql = "UPDATE customer SET name = ? WHERE email = \""+currentCustomer.getMail()+"\"";
+                        System.out.print("\nInserire nuovo nome: ");                    
+                        preparedStatement = connection.prepareStatement(sql);
+                        preparedStatement.setString(1, key.nextLine());
+                        preparedStatement.executeUpdate();
+                        break;
+                    case 2 : 
+                        sql = "UPDATE customer SET surname = ? WHERE email = \""+currentCustomer.getMail()+"\"";
+                        System.out.print("\nInserire nuovo cognome: ");         
+                        preparedStatement = connection.prepareStatement(sql);           
+                        preparedStatement.setString(1, key.nextLine());
+                        preparedStatement.executeUpdate();
+                        break;
+                    case 3 : 
+                        sql = "UPDATE customer SET email = ? WHERE email = \""+currentCustomer.getMail()+"\"";
+                        System.out.print("\nInserire nuovo email: ");        
+                        preparedStatement = connection.prepareStatement(sql);            
+                        preparedStatement.setString(1, key.nextLine());
+                        preparedStatement.executeUpdate();
+                        break;
+                    case 4 : 
+                        sql = "UPDATE customer SET password = ? WHERE email = \""+currentCustomer.getMail()+"\"";
+                        System.out.print("\nInserire nuova password: ");       
+                        preparedStatement = connection.prepareStatement(sql);            
+                        preparedStatement.setString(1, encrypt(key.nextLine()));
+                        preparedStatement.executeUpdate();
+                        break;
+                    case 5 : 
+                        sql = "UPDATE customer SET address = ? WHERE email = \""+currentCustomer.getMail()+"\"";
+                        System.out.print("\nInserire nuovo indirizzo: ");       
+                        preparedStatement = connection.prepareStatement(sql);             
+                        preparedStatement.setString(1, key.nextLine());
+                        preparedStatement.executeUpdate();
+                        break;
+                    case 6 : 
+                        sql = "UPDATE customer SET city = ? WHERE email = \""+currentCustomer.getMail()+"\"";
+                        System.out.print("\nInserire nuova città: ");      
+                        preparedStatement = connection.prepareStatement(sql);              
+                        preparedStatement.setString(1, key.nextLine());
+                        preparedStatement.executeUpdate();
+                        break;
+                    case 7 : 
+                        sql = "UPDATE customer SET cap = ? WHERE email = \""+currentCustomer.getMail()+"\"";
+                        System.out.print("\nInserire nuovo cap: ");    
+                        preparedStatement = connection.prepareStatement(sql);                
+                        preparedStatement.setString(1, key.nextLine());
+                        preparedStatement.executeUpdate();
+                        break;
+                    case 8 : 
+                        sql = "UPDATE customer SET payment = ? WHERE email = \""+currentCustomer.getMail()+"\"";
+                        System.out.print("\nScegliere il pagamento preferito:\n\n1. PayPal\n2. Carta di Credito\n3. Alla consegna\n\nScelta: ");
+                        preparedStatement = connection.prepareStatement(sql);
+                        preparedStatement.setString(1, Payment.values()[key.nextInt()-1].toString());
+                        preparedStatement.executeUpdate();
+                        break;
+                }
+                System.out.print("Modifica:\n1. Nome\n2. Cognome\n3. Email\n4. Password\n5. Indirizzo\n6. Città\n7. CAP\n8.Metodo di Pagamento\n9. Logout\n\nScelta: ");
+                choose = key.nextInt();
+                key.nextLine();
+            }
+            
+        }
+
+        private void printWelcomeMenu(){
+
+            System.out.println("\nBenvnuti in EasyToHome!\n\n1.Login\n2.Registrazione\n\nCosa si desidera fare? ");
+        }
+
+        private void welcomeSelection(int choose) throws SQLException{
+
+            switch(choose){
+
+                case 1 : login();
+                    break;
+                case 2 : signup();
+                    break;
+                default : System.err.println("Scelta errata!");
+                    break;
+            }
+
+        }
+
+        private void printLoggedMenu(){
+
+            System.out.println("\nBenvenuto "+currentCustomer.getName()+", cosa desideri fare?\n\n1. Modifica anagrafica\n2. Elimina Account \nScelta: ");
+        }
+
+        private void loggedSelection(int choose) throws SQLException{
+
+            switch(choose){
+
+                case 1 : modifyCustomer();
+                    break;
+
+                case 2 : delete();
+                    break;
+
+                default : System.err.println("Errore");
+
+            }
+        }
+    }
 
 
