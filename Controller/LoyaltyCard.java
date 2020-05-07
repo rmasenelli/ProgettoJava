@@ -1,14 +1,13 @@
-
-//import java.time.LocalDate;
+import java.util.Date;
 
 public class LoyaltyCard {
 
     private final int code;
-    private final java.util.Date emissionDate;
+    private final Date emissionDate;
     private int points;
 
 
-    public LoyaltyCard(int id, java.util.Date emissionDate){
+    public LoyaltyCard(int id, Date emissionDate){
 
         this.code = id;
         this.emissionDate = emissionDate;
@@ -16,7 +15,13 @@ public class LoyaltyCard {
     }
 
     public int getCode(){
+        
         return this.code;
+    }
+
+    public int getPoints(){
+
+        return this.points;
     }
 
 }

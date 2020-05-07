@@ -27,6 +27,7 @@ public class Supermarket {
 
             if(choose == 1){
                 login();
+                delete();
 
             }
             else if(choose == 2){
@@ -57,9 +58,10 @@ public class Supermarket {
             while(rs.next()){
 
                 id = rs.getInt(1);
+                System.out.println("ID scorso: "+id);
             }
 
-            return id;
+            return id+1;
         }
 
         private void login() throws SQLException {
@@ -78,7 +80,8 @@ public class Supermarket {
             
             Statement st = connection.createStatement();
             ResultSet rs=st.executeQuery("SELECT * FROM customer");
-S        while(rs.next()){
+
+        while(rs.next()){
                 if(rs.getString("email").equals(email)){
 
                     if(rs.getString("password").equals(password)){
@@ -122,7 +125,7 @@ S        while(rs.next()){
             st.executeUpdate(sql2);
             st.executeUpdate(sql3);
 
-            System.out.println("Utente rimosso con succeso!");
+            System.out.println("Utente rimosso con successo!");
         }
 
         private void signup() throws SQLException {
@@ -158,7 +161,10 @@ S        while(rs.next()){
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
             String currentTime = sdf.format(dt);
+            
             int idCard = getIDFromDB();
+
+            System.out.println("ID Retrieved:"+idCard);
 
             st.executeUpdate("INSERT INTO loyaltyCard (code, emissionDate, points) VALUES ('"+idCard+"', '"+currentTime+"', '"+0+"')");
 
