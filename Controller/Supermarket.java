@@ -1,3 +1,6 @@
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,17 +12,16 @@ public class Supermarket {
 
     private Customer currentCustomer;
     private Connection connection;
-    private Statement st;
-    private ResultSet rs;
-
-    p
+    private Statement statement;
+    private ResultSet resultSet;
+    private static final String connectionString = "jdbc:mysql://localhost:3306/supermarketdb?serverTimezone=UTC";
 
     public Supermarket() {
 
         try {
 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC", "root", "admin");
-            st = connection.createStatement();
+            connection = DriverManager.getConnection(connectionString, "root", "admin");
+            statement = connection.createStatement();
 
         } catch (SQLException e) {
 
@@ -40,6 +42,7 @@ public class Supermarket {
             if(choose == 1){
                 try{
                     login();
+                    delete();
 
                 }
                 catch(SQLException e){
@@ -65,7 +68,6 @@ public class Supermarket {
 
             System.out.println("\n");
         }
-
         public static void main(String[] args) {            
 
             
@@ -74,15 +76,17 @@ public class Supermarket {
 
         private int getIDFromDB() throws SQLException{
 
-            rs=st.executeQuery("SELECT code FROM loyaltyCard");            
-            int id = 0;
+            resultSet=statement.executeQuery("SELECT MAX(code) FROM loyaltyCard");            
 
-            while(rs.next()){
+            resultSet.next();
+            /*int id = 0;
 
-                id = rs.getInt(1);
+            while(resultSet.next()){
+
+                id = resultSet.getInt(1);
                 //System.out.println("ID scorso: "+id);
-            }
-            return id+1;
+            }*/
+            return resultSet.getInt(1)+1;//id+1;
         }
 
         private void login() throws SQLException {
@@ -91,7 +95,7 @@ public class Supermarket {
 
             Scanner key = new Scanner(System.in);
 
-            System.out.print("\nusername: ");
+            System.out.print("\nUsername: ");
             email = key.nextLine();
 
             System.out.print("Password: ");                
@@ -99,54 +103,53 @@ public class Supermarket {
 
             key.close();
             
-            Statement st = connection.createStatement();
-            ResultSet rs=st.executeQuery("SELECT * FROM customer");
+            try {
+                resultSet=statement.executeQuery("SELECT * FROM customer WHERE email = \""+email+"\"");
+                resultSet.next();
 
-        while(rs.next()){
-                if(rs.getString("email").equals(email)){
+                if(resultSet.getString("password").equals(encrypt(password))){
 
-                    if(rs.getString("password").equals(password)){
+                    System.out.println("\nLOGIN EFFETTUATO!\n");                        
 
-                        System.out.println("\nLOGIN EFFETTUATO!\n");                        
-                        currentCustomer = 
-                            new Customer(rs.getString("name"), rs.getString("surname"), rs.getString("address"), rs.getString("cap"), rs.getString("city"), 
-                            rs.getString("telephone"), rs.getString("email"), rs.getString("password"), retrieveCardFromDB(rs.getInt("loyaltyCard")), Payment.valueOf(rs.getString("payment")));
-                            System.out.println(currentCustomer.toString());
-                        return;
-                    }
-                    else{
-                        System.out.println("\n\nPassword Errata!\n\n");
-                        return;
-                    }
-                }   
+                    currentCustomer = 
+                        new Customer(resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("address"), 
+                        resultSet.getString("cap"), resultSet.getString("city"), resultSet.getString("telephone"), resultSet.getString("email"), 
+                        resultSet.getString("password"), retrieveCardFromDB(resultSet.getInt("loyaltyCard")), Payment.valueOf(resultSet.getString("payment")));
+
+                    System.out.println(currentCustomer.toString());
+                    return;
+                }
+                else{
+                    System.out.println("\n\nPassword Errata!\n\n");
+                    return;
+                }
+            } catch (Exception e) {
+                System.out.println("\nUtente inesistente!");
+                e.printStackTrace();
             }
-
-            System.out.println("\nUtente inesistente!");
-
         }
 
         private LoyaltyCard retrieveCardFromDB(int code) throws SQLException {
 
+            Statement statement = connection.createStatement();
             String sql = "SELECT * FROM loyaltyCard WHERE code = \""+code+"\"";
-            rs=st.executeQuery(sql);
-            rs.next();
+            ResultSet resultSet=statement.executeQuery(sql);
+            resultSet.next();
             
-            return new LoyaltyCard(rs.getInt("code"), rs.getTimestamp("emissionDate"));
+            return new LoyaltyCard(resultSet.getInt("code"), resultSet.getTimestamp("emissionDate"));
         }
 
         private void delete() throws SQLException {
 
             System.out.println("\nELIMINAZIONE IN CORSO...\n");
+            
             String sql1 = "DELETE FROM customer WHERE email = \""+currentCustomer.getMail()+"\"";
-            //System.out.println("Elimnazione Card n. "+currentCustomer.getCard().getCode());
             String sql2 = "DELETE FROM loyaltyCard WHERE code = \""+currentCustomer.getCard().getCode()+"\"";
             String sql3 = "DELETE FROM shopping WHERE customer = \""+currentCustomer.getMail()+"\"";
             
-            Statement st = connection.createStatement();
-            
-            st.executeUpdate(sql1);
-            st.executeUpdate(sql2);
-            st.executeUpdate(sql3);
+            statement.executeUpdate(sql1);
+            statement.executeUpdate(sql2);
+            statement.executeUpdate(sql3);
 
             currentCustomer= null;
 
@@ -178,10 +181,12 @@ public class Supermarket {
             System.out.print("\nScegliere il pagamento preferito:\n\n1. PayPal\n2. Carta di Credito\n3. Alla consegna\n\nScelta: ");
 
             payment = Payment.values()[key.nextInt()-1]; 
-            
+
+            password=encrypt(password);
+
             key.close();
 
-            //Statement st = connection.createStatement();
+            //Statement statement = connection.createStatement();
 
             java.util.Date dt = new java.util.Date();
 
@@ -193,23 +198,48 @@ public class Supermarket {
 
            // System.out.println("ID Retrieved:"+idCard);
 
-            st.executeUpdate("INSERT INTO loyaltyCard (code, emissionDate, points) VALUES ('"+idCard+"', '"+currentTime+"', '"+0+"')");
+            statement.executeUpdate("INSERT INTO loyaltyCard (code, emissionDate, points) VALUES ('"+idCard+"', '"+currentTime+"', '"+0+"')");
 
-            st.executeUpdate("INSERT INTO Customer (name, surname, address, city, cap, telephone, email, password, payment, loyaltyCard) "
+            statement.executeUpdate("INSERT INTO Customer (name, surname, address, city, cap, telephone, email, password, payment, loyaltyCard) "
                             +"VALUES ('"+name+"', '"+surname+"', '"+address+"', '"+city+"', '"+cap+"', '"+telephone+"','"+email+"', '"+password+"', '"+payment+"', "+idCard+")");             
 
-            System.out.println("\nCrezione Account cliente conlcusa con successo!");
+            System.out.println("\nCrezione Account cliente conclusa con successo!");
 
             currentCustomer = new Customer(name, surname, address, cap, city, telephone, email, password, new LoyaltyCard(getIDFromDB(), dt), payment);
 
         }
 
-        private String cryptPassword(String tmp){
+        private static String encrypt(String input){
 
-            String salt = "!Pi(Z#9";
-
-            return tmp^salt; 
+            try { 
+                // getInstance() method is called with algorithm SHA-1 
+                MessageDigest md = MessageDigest.getInstance("SHA-1"); 
+    
+                // digest() method is called 
+                // to calculate message digest of the input string 
+                // returned as array of byte 
+                byte[] messageDigest = md.digest(input.getBytes()); 
+    
+                // Convert byte array into signum representation 
+                BigInteger no = new BigInteger(1, messageDigest); 
+    
+                // Convert message digest into hex value 
+                String hashtext = no.toString(16); 
+    
+                // Add preceding 0s to make it 32 bit 
+                while (hashtext.length() < 32) { 
+                    hashtext = "0" + hashtext; 
+                } 
+    
+                // return the HashText 
+                return hashtext; 
+            } 
+    
+            // For specifying wrong message digest algorithms 
+            catch (NoSuchAlgorithmException e) { 
+                throw new RuntimeException(e); 
+            } 
         }
-    }
+}
 
 
