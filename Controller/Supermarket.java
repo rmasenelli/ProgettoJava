@@ -65,6 +65,7 @@ public class Supermarket{
 
         System.out.println("\n");
         }
+        
         public static void main(String[] args) {            
 
             new Supermarket();
