@@ -7,18 +7,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class Supermarket {
+public class Supermarket{
 
     private Customer currentCustomer;
     private Connection connection;
     private Statement statement;
     private ResultSet resultSet;
     private static final String connectionString = "jdbc:mysql://localhost:3306/supermarketdb?serverTimezone=UTC";
-
+    
     public Supermarket() {
 
+        
         try {
 
             connection = DriverManager.getConnection(connectionString, "root", "admin");
@@ -62,8 +67,7 @@ public class Supermarket {
         }
         public static void main(String[] args) {            
 
-            
-                new Supermarket();
+            new Supermarket();
         }
 
         private int getIDFromDB() throws SQLException{
@@ -71,14 +75,8 @@ public class Supermarket {
             resultSet=statement.executeQuery("SELECT MAX(code) FROM loyaltyCard");            
 
             resultSet.next();
-            /*int id = 0;
 
-            while(resultSet.next()){
-
-                id = resultSet.getInt(1);
-                //System.out.println("ID scorso: "+id);
-            }*/
-            return resultSet.getInt(1)+1;//id+1;
+            return resultSet.getInt(1)+1;
         }
 
         private void login() throws SQLException {
@@ -171,12 +169,20 @@ public class Supermarket {
             System.out.print("\nScegliere il pagamento preferito:\n\n1. PayPal\n2. Carta di Credito\n3. Alla consegna\n\nScelta: ");
 
             payment = Payment.values()[key.nextInt()-1]; 
+            key.nextLine();
 
             password=encrypt(password);
 
-            java.util.Date dt = new java.util.Date();
+            while(!checkMail(email)){
 
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                System.out.println("\nEmail non valida!\n");
+                System.out.print("Inserire email: ");
+                email = key.nextLine();
+            }
+
+            Date dt = new java.util.Date();
+
+            SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
             String currentTime = sdf.format(dt);
             
@@ -341,6 +347,15 @@ public class Supermarket {
 
             }
         }
-    }
+
+        private boolean checkMail(String email){
+
+            String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(email);
+
+            return matcher.matches();
+        }
+}
 
 
