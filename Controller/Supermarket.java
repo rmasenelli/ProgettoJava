@@ -131,13 +131,14 @@ public class Supermarket{
 
             System.out.println("\nELIMINAZIONE IN CORSO...\n");
             
-            String sql1 = "DELETE FROM customer WHERE email = \""+currentCustomer.getMail()+"\"";
-            String sql2 = "DELETE FROM loyaltyCard WHERE code = \""+currentCustomer.getCard().getCode()+"\"";
-            String sql3 = "DELETE FROM shopping WHERE customer = \""+currentCustomer.getMail()+"\"";
+            String sqlCustomer = "DELETE FROM customer WHERE email = \""+currentCustomer.getMail()+"\"";
+            System.out.println(currentCustomer.getCard().getCode());
+            String sqlCard = "DELETE FROM loyaltyCard WHERE code = \""+currentCustomer.getCard().getCode()+"\"";
+            String sqlShopping = "DELETE FROM shopping WHERE customer = \""+currentCustomer.getMail()+"\"";
             
-            statement.executeUpdate(sql1);
-            statement.executeUpdate(sql2);
-            statement.executeUpdate(sql3);
+            statement.executeUpdate(sqlCustomer);
+            statement.executeUpdate(sqlCard);
+            statement.executeUpdate(sqlShopping);
 
             currentCustomer= null;
 
@@ -195,8 +196,7 @@ public class Supermarket{
 
             System.out.println("\nCrezione Account cliente conclusa con successo!");
 
-            currentCustomer = new Customer(name, surname, address, cap, city, telephone, email, password, new LoyaltyCard(getIDFromDB(), dt), payment);
-
+            currentCustomer = new Customer(name, surname, address, cap, city, telephone, email, password, new LoyaltyCard(idCard, dt), payment);
         }
 
         private static String encrypt(String input){
