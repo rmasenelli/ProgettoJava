@@ -262,8 +262,9 @@ public class Supermarket {
                     case 4 : 
                         sql = "UPDATE customer SET password = ? WHERE email = \""+currentCustomer.getMail()+"\"";
                         System.out.print("\nInserire nuova password: ");       
-                        preparedStatement = connection.prepareStatement(sql);            
-                        preparedStatement.setString(1, encrypt(key.nextLine()));
+                        preparedStatement = connection.prepareStatement(sql);    
+                        String encrypt = encrypt(key.nextLine());      
+                        preparedStatement.setString(1, encrypt);
                         preparedStatement.executeUpdate();
                         break;
                     case 5 : 
