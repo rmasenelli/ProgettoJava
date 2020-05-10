@@ -8,7 +8,7 @@ public class Shopping {
     //private Date deliveryDate;
     //private String deliveryInterval; //String oppure ore?
     //private List<Product> cart;
-   // private final Customer customer;
+    //private final Customer customer;
     //private int price;
     //private Payment payment;
     //private int points;

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane depthTest="DISABLE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXButton id="btn" layoutX="325.0" layoutY="241.0" prefHeight="34.0" prefWidth="98.0" style="-fx-background-color: #f96;" stylesheets="@style.css" text="Login" />
+      <JFXButton id="btn" layoutX="213.0" layoutY="241.0" prefHeight="34.0" prefWidth="98.0" style="-fx-background-color: #f96;" stylesheets="@style.css" text="Registrazione" />
+      <JFXTextArea layoutX="225.0" layoutY="115.0" prefHeight="34.0" prefWidth="187.0" />
+      <JFXTextArea layoutX="225.0" layoutY="164.0" prefHeight="34.0" prefWidth="187.0" />
+   </children>
+</AnchorPane>

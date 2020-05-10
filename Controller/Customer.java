@@ -13,15 +13,14 @@ public class Customer{
     private String telephone;
     private String mail;
     private String password;
-    //private final LoyaltyCard card;
-    private String payment;
-    //private Payment payment;
+    private final LoyaltyCard card;
+    private Payment payment;
     //private List<Product> cartHistory;
     //private List<Product> cart;
 
         // COSTRUTTORE CUSTOMER
 
-    public Customer(String name, String surname, String address, String cap, String city, String telephone, String mail, String password, String payment){
+    public Customer(String name, String surname, String address, String cap, String city, String telephone, String mail, String password, LoyaltyCard card, Payment payment){
 
         this.name = name;
         this.surname = surname;
@@ -31,17 +30,12 @@ public class Customer{
         this.telephone = telephone;
         this.mail = mail;
         this.password = password;
-        //this.card = new LoyaltyCard();
+        this.card = card;
         this.payment = payment;
         //this.cartHistory = new LinkedList<Product>();
         //this.cart = new LinkedList<Product>();
 
     }
-
-    //private void saveToDB(){
-        
-    //}
-
         // GETTERS CUSTOMER
 
     public String getName(){
@@ -79,23 +73,26 @@ public class Customer{
         return this.mail;
     }
 
-    //getPassword? :(
-
-    /*public LoyaltyCard getCard(){
+    public LoyaltyCard getCard(){
 
         return this.card;
-    }*/
+    }
 
-    /*public Payment getPayment(){
+    public Payment getPayment(){
 
         return this.payment;
-    }*/
-
-    // getHistory e getCart
-
+    }
 
     public String toString(){
 
-        return "Nome: "+this.name+"        Cognome: "+this.surname+"\nEmail: "+this.mail+"\nIndirizzo: "+this.address+"\nCittà:"+this.city+"          CAP: "+this.cap+"\nTelefono: "+this.telephone; 
+        return "Nome: "+this.name+
+        "        Cognome: "+this.surname+
+        "\nEmail: "+this.mail+
+        "\nIndirizzo: "+this.address+
+        "\nCittà:"+this.city+
+        "          CAP: "+this.cap+
+        "\nTelefono: "+this.telephone+
+        "\nN. carta: "+this.card.getCode()+
+        "\nPagamento preferito: "+payment; 
     }
 }

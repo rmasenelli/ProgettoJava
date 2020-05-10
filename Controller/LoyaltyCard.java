@@ -1,19 +1,27 @@
-
-//import java.time.LocalDate;
+import java.util.Date;
 
 public class LoyaltyCard {
 
-    //private static int id = 0;
-    //private final int code;
-    //private final LocalDate emissionDate;
-    //private int points;
+    private final int code;
+    private final Date emissionDate;
+    private int points;
 
 
-    public LoyaltyCard(){
-        //LoyaltyCard.id++;
-        //this.code = id;
-        //this.emissionDate = LocalDate.now();
-        //this.points = 0;
+    public LoyaltyCard(int id, Date emissionDate){
+
+        this.code = id;
+        this.emissionDate = emissionDate;
+        this.points = 0;
+    }
+
+    public int getCode(){
+        
+        return this.code;
+    }
+
+    public int getPoints(){
+
+        return this.points;
     }
 
 }
