@@ -3,25 +3,14 @@
     "java.project.referencedLibraries": {
         "include": [
             "lib/**/*.jar",
-            "c:\\Users\\Riccardo\\Documents\\javafx-sdk-11.0.2\\lib\\javafx.base.jar",
-            "c:\\Users\\Riccardo\\Documents\\javafx-sdk-11.0.2\\lib\\javafx.controls.jar",
-            "c:\\Users\\Riccardo\\Documents\\javafx-sdk-11.0.2\\lib\\javafx.fxml.jar",
-            "c:\\Users\\Riccardo\\Documents\\javafx-sdk-11.0.2\\lib\\javafx.graphics.jar",
-            "c:\\Users\\Riccardo\\Documents\\javafx-sdk-11.0.2\\lib\\javafx.media.jar",
-            "c:\\Users\\Riccardo\\Documents\\javafx-sdk-11.0.2\\lib\\javafx.swing.jar",
-            "c:\\Users\\Riccardo\\Documents\\javafx-sdk-11.0.2\\lib\\javafx.web.jar",
-            "c:\\Users\\Riccardo\\Downloads\\Telegram Desktop\\mysql-connector-java-8.0.20.jar",
-            "c:\\Users\\Riccardo\\Documents\\JAVA\\javafx-sdk-11.0.2\\lib\\javafx.base.jar",
-            "c:\\Users\\Riccardo\\Documents\\JAVA\\javafx-sdk-11.0.2\\lib\\javafx.controls.jar",
-            "c:\\Users\\Riccardo\\Documents\\JAVA\\javafx-sdk-11.0.2\\lib\\javafx.fxml.jar",
-            "c:\\Users\\Riccardo\\Documents\\JAVA\\javafx-sdk-11.0.2\\lib\\javafx.graphics.jar",
-            "c:\\Users\\Riccardo\\Documents\\JAVA\\javafx-sdk-11.0.2\\lib\\javafx.media.jar",
-            "c:\\Users\\Riccardo\\Documents\\JAVA\\javafx-sdk-11.0.2\\lib\\javafx.swing.jar",
-            "c:\\Users\\Riccardo\\Documents\\JAVA\\javafx-sdk-11.0.2\\lib\\javafx.web.jar",
-            "c:\\Users\\Riccardo\\Documents\\JAVA\\javafx-sdk-11.0.2\\lib\\javafx-swt.jar"
+            "c:\\Users\\pippo\\Documents\\JAVAFX\\javafx-sdk-11.0.2\\lib\\javafx.base.jar",
+            "c:\\Users\\pippo\\Documents\\JAVAFX\\javafx-sdk-11.0.2\\lib\\javafx.controls.jar",
+            "c:\\Users\\pippo\\Documents\\JAVAFX\\javafx-sdk-11.0.2\\lib\\javafx.fxml.jar",
+            "c:\\Users\\pippo\\Documents\\JAVAFX\\javafx-sdk-11.0.2\\lib\\javafx.graphics.jar",
+            "c:\\Users\\pippo\\Documents\\JAVAFX\\javafx-sdk-11.0.2\\lib\\javafx.media.jar",
+            "c:\\Users\\pippo\\Documents\\JAVAFX\\javafx-sdk-11.0.2\\lib\\javafx.swing.jar",
+            "c:\\Users\\pippo\\Documents\\JAVAFX\\javafx-sdk-11.0.2\\lib\\javafx.web.jar",
+            "c:\\Users\\pippo\\Documents\\JAVAFX\\javafx-sdk-11.0.2\\lib\\javafx-swt.jar"
         ],
-        "exclude": [
-            "c:\\Users\\Riccardo\\Documents\\javafx-sdk-11.0.2\\lib\\javafx-swt.jar"
-        ]
     }
 }

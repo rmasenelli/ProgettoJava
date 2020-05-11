@@ -4,6 +4,14 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Supermarket",
+            "request": "launch",
+            "mainClass": "Supermarket",
+            "projectName": "ProgettoJava_307c88a3"
+        },
         {
             "type": "java",
             "name": "Debug (Launch) - Current File",
@@ -13,7 +21,7 @@
         {
             "type": "java",
             "name": "Debug (Launch)-Main<ProgettoJava_a55787fa>",
-            "vmArgs": "--module-path=/Users/Riccardo/Documents/JAVA/javafx-sdk-11.0.2/lib --add-modules=ALL-MODULE-PATH",
+            "vmArgs": "--module-path=/Users/pippo/Documents/JAVAFX/javafx-sdk-11.0.2/lib --add-modules=ALL-MODULE-PATH",
             "request": "launch",
             "mainClass": "Main",
             "projectName": "ProgettoJava_a55787fa"
@@ -21,7 +29,7 @@
         {
             "type": "java",
             "name": "Debug (Launch)-Supermarket<ProgettoJava_a55787fa>",
-            "vmArgs": "--module-path=/Users/Riccardo/Documents/JAVA/javafx-sdk-11.0.2/lib --add-modules=ALL-MODULE-PATH",
+            "vmArgs": "--module-path=/Users/pippo/Documents/JAVAFX/javafx-sdk-11.0.2/lib --add-modules=ALL-MODULE-PATH",
             "request": "launch",
             "mainClass": "Supermarket",
             "projectName": "ProgettoJava_a55787fa"
