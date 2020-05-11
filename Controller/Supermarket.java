@@ -13,15 +13,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// Import JAVAFX
-
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-
-public class Supermarket extends Application {
+public class Supermarket{
 
     private Customer currentCustomer;
     private Connection connection;
@@ -32,18 +24,7 @@ public class Supermarket extends Application {
     private static final String auth2 = "admin";    
 
 
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
-        AnchorPane pane = loader.load();
-        Scene scene = new Scene(pane);
-
-        scene.getStylesheets().addAll(getClass().getResource("style.css").toExternalForm());
-
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public Supermarket(){
 
         try {
 
@@ -84,55 +65,10 @@ public class Supermarket extends Application {
 
         System.out.println("\n");
     }
-    
-    /*public Supermarket() {
-
-        new Main();
-        
-        try {
-
-            connection = DriverManager.getConnection(connectionString, auth1, auth2);
-            statement = connection.createStatement();
-
-        } catch (SQLException e) {
-
-            System.err.println("\nErrore di connessione!\n");
-            e.printStackTrace();
-        }
-
-        System.out.println("\nConnessione al DB riuscita\n");
-
-        Scanner key = new Scanner(System.in);
-
-        printWelcomeMenu();
-
-        try {
-
-            welcomeSelection(key.nextInt());
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        printLoggedMenu();
-
-        try {
-
-            loggedSelection(key.nextInt());
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        key.close();
-
-        System.out.println("\n");
-    }*/
 
     public static void main(String[] args) {
         
-        launch(args);
-        //new Supermarket();
+        new Supermarket();
     }
 
     private int getIDFromDB() throws SQLException {
@@ -388,7 +324,7 @@ public class Supermarket extends Application {
         System.out.println("\nBenvnuti in EasyToHome!\n\n1.Login\n2.Registrazione\n\nCosa si desidera fare? ");
     }
 
-    private void welcomeSelection(int choose) throws SQLException {
+    private void welcomeSelection(int choose) throws SQLException { // gestisce la selezione dell'azione scelta dall'utente
 
         switch (choose) {
 
@@ -405,7 +341,7 @@ public class Supermarket extends Application {
 
     }
 
-    private void printLoggedMenu() {
+    private void printLoggedMenu() { // Stampa il menù per l'utente loggato
 
         System.out.println("\nBenvenuto " + currentCustomer.getName()
                 + ", cosa desideri fare?\n\n1. Modifica anagrafica\n2. Elimina Account \nScelta: ");
@@ -429,7 +365,7 @@ public class Supermarket extends Application {
         }
     }
 
-    private boolean checkMail(String email) {
+    private boolean checkMail(String email) { // Espressione regolare per controllare la validità della mail inserita dall'utente
 
         String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
         Pattern pattern = Pattern.compile(regex);
